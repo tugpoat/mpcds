@@ -1,0 +1,12 @@
+mpcDS v0.2.1, 2012 Pat Murphy
+Uses modified graphics from an old PALib mpd client.
+
+0.1: First public release
+0.2: complete code restructuring, more modular and much less messy
+0.2.1:
+-Removed client-side host states for playing, paused and stopped as they sometimes caused sync issues
+-Added some comments to explain some of my laziness in this project ;)
+
+COMPILING:
+	-Use Makefile.ds.release.
+	-If you want to test in an emulator, use Makefile.emu.ideas, or write your own emulator-specific makefile.
