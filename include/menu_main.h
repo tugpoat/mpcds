@@ -26,8 +26,7 @@ void menu_main_redraw(void);
 void menu_main_destroy(void);
 
 //button stuff, possibly events or something if implemented in a GUI lib
-void initbutton(BUTTON *butt, u8 *gfx);
-void initbutton_new(BUTTON *butt, u8 *gfx, const char *name, const unsigned int x, const unsigned int y, const unsigned int w, const unsigned int h, void (*callback)(void), const unsigned short int initstate);
+void initbutton(BUTTON *butt, u8 *gfx, const char *name, const unsigned int x, const unsigned int y, const unsigned int w, const unsigned int h, void (*callback)(void), const unsigned short int initstate);
 void destroybutton(BUTTON *butt);
 
 //actual button stuff
