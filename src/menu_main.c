@@ -24,7 +24,7 @@
 #include "menu_main.h"
 
 //Initializes a button and its related VRAM space.
-void initbutton_new(BUTTON *butt, u8 *gfx, 
+void initbutton(BUTTON *butt, u8 *gfx, 
 			const char *name, 
 			const unsigned int x, const unsigned int y, 
 			const unsigned int w, const unsigned int h, 
@@ -37,13 +37,6 @@ void initbutton_new(BUTTON *butt, u8 *gfx,
 	butt->h = h;
 	butt->state = initstate;
 	butt->callback = callback;
-	butt->sprite_gfx_mem = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
-	butt->frame_gfx = gfx;
-}
-
-//old initbutton(). Initializes a button's VRAM space.
-void initbutton(BUTTON *butt, u8 *gfx)
-{
 	butt->sprite_gfx_mem = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
 	butt->frame_gfx = gfx;
 }
@@ -66,77 +59,28 @@ void menu_main_init(void)
 	
 	//FIXME: I don't remember if this actually worked. -pat, 2015
 	//test new function to reduce clutter in this one
-	initbutton_new(menu_buttons[idx], (u8*) &btn_playTiles, "PLAY", 14, 16, 32, 32, &menu_main_cb_play, BTN_UP);
+	initbutton(menu_buttons[idx], (u8*) &btn_playTiles, "PLAY", 14, 16, 32, 32, &menu_main_cb_play, BTN_UP);
 	
 	idx = sizeof(BUTTON);
-	strcpy(menu_buttons[idx]->name, "PAUSE");
-	menu_buttons[idx]->x = 52;
-	menu_buttons[idx]->y = 16;
-	menu_buttons[idx]->w = 32;
-	menu_buttons[idx]->h = 32;
-	menu_buttons[idx]->state = BTN_UP;
-	menu_buttons[idx]->callback = &menu_main_cb_pause;
-	initbutton(menu_buttons[idx], (u8*) &btn_pauseTiles);
+	initbutton(menu_buttons[idx], (u8*) &btn_pauseTiles, "PAUSE", 52, 16, 32, 32, &menu_main_cb_pause, BTN_UP);
 	
-	idx =  sizeof(BUTTON) * 2;
-	strcpy(menu_buttons[idx]->name, "STOP");
-	menu_buttons[idx]->x = 90;
-	menu_buttons[idx]->y = 16;
-	menu_buttons[idx]->w = 32;
-	menu_buttons[idx]->h = 32;
-	menu_buttons[idx]->state = BTN_UP;
-	menu_buttons[idx]->callback = &menu_main_cb_stop;
-	initbutton(menu_buttons[idx], (u8*) &btn_stopTiles);
+	idx = sizeof(BUTTON) * 2;
+	initbutton(menu_buttons[idx], (u8*) &btn_stopTiles, "STOP", 90, 16, 32, 32, &menu_main_cb_stop, BTN_UP);
 	
-	idx =  sizeof(BUTTON) * 3;
-	strcpy(menu_buttons[idx]->name, "PREV");
-	menu_buttons[idx]->x = 32;
-	menu_buttons[idx]->y = 47;
-	menu_buttons[idx]->w = 32;
-	menu_buttons[idx]->h = 32;
-	menu_buttons[idx]->state = BTN_UP;
-	menu_buttons[idx]->callback = &menu_main_cb_prev;
-	initbutton(menu_buttons[idx], (u8*) &btn_prevTiles);
+	idx = sizeof(BUTTON) * 3;
+	initbutton(menu_buttons[idx], (u8*) &btn_prevTiles, "PREV", 32, 47, 32, 32, &menu_main_cb_prev, BTN_UP);
 	
-	idx =  sizeof(BUTTON) * 4;
-	strcpy(menu_buttons[idx]->name, "NEXT");
-	menu_buttons[idx]->x = 71;
-	menu_buttons[idx]->y = 47;
-	menu_buttons[idx]->w = 32;
-	menu_buttons[idx]->h = 32;
-	menu_buttons[idx]->state = BTN_UP;
-	menu_buttons[idx]->callback = &menu_main_cb_next;
-	initbutton(menu_buttons[idx], (u8*) &btn_nextTiles);
+	idx = sizeof(BUTTON) * 4;
+	initbutton(menu_buttons[idx], (u8*) &btn_nextTiles, "NEXT", 71, 47, 32, 32, &menu_main_cb_next, BTN_UP);
 	
 	idx =  sizeof(BUTTON) * 5;
-	strcpy(menu_buttons[idx]->name, "VOLDN");
-	menu_buttons[idx]->x = 42;
-	menu_buttons[idx]->y = 146;
-	menu_buttons[idx]->w = 32;
-	menu_buttons[idx]->h = 32;
-	menu_buttons[idx]->state = BTN_UP;
-	menu_buttons[idx]->callback = &menu_main_cb_voldn;
-	initbutton(menu_buttons[idx], (u8*) &btn_voldnTiles);
+	initbutton(menu_buttons[idx], (u8*) &btn_voldnTiles, "VOLDN", 42, 146, 32, 32, &menu_main_cb_voldn, BTN_UP);
 	
 	idx =  sizeof(BUTTON) * 6;
-	strcpy(menu_buttons[idx]->name, "VOLUP");
-	menu_buttons[idx]->x = 42;
-	menu_buttons[idx]->y = 119;
-	menu_buttons[idx]->w = 32;
-	menu_buttons[idx]->h = 32;
-	menu_buttons[idx]->state = BTN_UP;
-	menu_buttons[idx]->callback = &menu_main_cb_volup;
-	initbutton(menu_buttons[idx], (u8*) &btn_volupTiles);
+	initbutton(menu_buttons[idx], (u8*) &btn_volupTiles, "VOLUP", 42, 119, 32, 32, &menu_main_cb_volup, BTN_UP);
 	
 	idx =  sizeof(BUTTON) * 7;
-	strcpy(menu_buttons[idx]->name, "REPEAT");
-	menu_buttons[idx]->x = 32;
-	menu_buttons[idx]->y = 85;
-	menu_buttons[idx]->w = 32;
-	menu_buttons[idx]->h = 32;
-	menu_buttons[idx]->state = BTN_UP;
-	menu_buttons[idx]->callback = &menu_main_cb_repeat;
-	initbutton(menu_buttons[idx], (u8*) &btn_repeatTiles);
+	initbutton(menu_buttons[idx], (u8*) &btn_repeatTiles, "REPEAT", 32, 85, 32, 32, &menu_main_cb_repeat, BTN_UP);
 	
 	/*
 		Copy the sprite pallete into memory to be used.
@@ -164,7 +108,7 @@ void menu_main_destroy(void)
 //Update all of the objects to be displayed before next redraw
 void menu_main_update(void)
 {
-	//we should probably make surre that we draw everything next refresh
+	//we should probably make sure that we draw everything next refresh
 	
 	int i;
 	for (i = 0; i <  sizeof(BUTTON) * NUM_BUTTONS; i += sizeof(BUTTON))
